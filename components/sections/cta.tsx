@@ -20,7 +20,7 @@ export function CtaSection({
         <Frame className="card relative overflow-hidden px-8 py-16 text-center sm:px-16 sm:py-20">
           <div className="studio-glow opacity-80" />
           <div className="relative z-[1] mx-auto flex max-w-2xl flex-col items-center gap-6">
-            <h2 className="text-balance font-serif text-4xl font-light leading-[1.04] tracking-tight sm:text-5xl">
+            <h2 className="text-balance font-display text-4xl font-medium leading-[1.05] tracking-tight text-fill sm:text-5xl">
               {title}
             </h2>
             <p className="text-pretty text-lg text-muted">{subtitle}</p>

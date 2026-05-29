@@ -76,7 +76,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-      <h2 className="max-w-3xl text-balance font-serif text-4xl font-light leading-[1.04] tracking-tight sm:text-5xl">
+      <h2 className="max-w-3xl text-balance font-display text-4xl font-medium leading-[1.05] tracking-tight text-fill sm:text-5xl">
         {title}
       </h2>
       {description ? (

@@ -1,51 +1,35 @@
 import Link from "next/link";
-import { ArrowRight, Upload, Wand2, Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container, SectionHeading } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
-import { ShowcaseStrip } from "@/components/sections/showcase-strip";
-import { SolutionCards } from "@/components/sections/solution-cards";
+import { CenterSlider } from "@/components/sections/center-slider";
 import { BeforeAfter } from "@/components/sections/before-after";
+import { HeroRotator } from "@/components/sections/hero-rotator";
+import { WorkflowTabs } from "@/components/sections/workflow-tabs";
+import { Testimonials } from "@/components/sections/testimonials";
+import { StatsShowcase } from "@/components/sections/stats-showcase";
+import { CategoryShowcase } from "@/components/sections/category-showcase";
 import { StatsBand } from "@/components/sections/stats-band";
 import { CtaSection } from "@/components/sections/cta";
 import { Placeholder } from "@/components/ui/placeholder";
 import { useCases } from "@/lib/use-cases";
 import { logoCloud } from "@/lib/site";
 
-const steps = [
-  {
-    icon: Upload,
-    title: "Send a product photo",
-    body: "A flat-lay, ghost-mannequin or hanger shot, or a whole catalogue feed. Phone photos are fine.",
-  },
-  {
-    icon: Wand2,
-    title: "Pick a model and scene",
-    body: "Choose skin tone, body type, pose and backdrop, or pin a recurring brand model.",
-  },
-  {
-    icon: Send,
-    title: "Publish on-model, at scale",
-    body: "Get licensed, on-brand imagery back on a webhook and write it straight to your store.",
-  },
-];
-
 export default function HomePage() {
   return (
     <>
       {/* ── Hero (editorial, image-led) ─────────────────────────────────── */}
-      <section className="relative overflow-hidden pt-32 sm:pt-40">
+      <section className="relative overflow-hidden bg-[#F0F0F0] pt-16 sm:pt-20">
         <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
+          <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
             {/* Copy */}
             <div className="flex flex-col items-start gap-6 pb-10 lg:pb-16">
               <Reveal delay={0.04}>
                 <h1 className="font-display text-4xl leading-[1.06] tracking-tight sm:text-5xl">
                   <span className="font-normal text-muted">On-model imagery</span>
                   <br />
-                  <span className="font-bold">for the brands that</span>
-                  <br />
-                  <span className="font-bold">move fast.</span>
+                  <span className="font-medium text-fill">for fast brands.</span>
                 </h1>
               </Reveal>
               <Reveal delay={0.12}>
@@ -67,24 +51,15 @@ export default function HomePage() {
               </Reveal>
             </div>
 
-            {/* Image */}
+            {/* Image — rotating AI-generated looks */}
             <Reveal delay={0.1}>
-              <div className="media relative h-[24rem] overflow-hidden rounded-2xl sm:h-[32rem] lg:h-[38rem]">
-                <Placeholder
-                  src="/img/ip/onmodel-jacket-1.png"
-                  tone="model"
-                  ratio="auto"
-                  rounded="rounded-none"
-                  className="h-full border-0"
-                  priority
-                />
-              </div>
+              <HeroRotator />
             </Reveal>
           </div>
         </Container>
 
         {/* High-contrast logo band */}
-        <div className="mt-14 bg-ink py-7">
+        <div className="bg-ink py-7">
           <Container>
             <p className="mb-6 text-center font-mono text-xs uppercase tracking-[0.22em] text-white/45">
               Top fashion teams build with Vela
@@ -94,7 +69,7 @@ export default function HomePage() {
                 {[...logoCloud, ...logoCloud].map((name, i) => (
                   <span
                     key={`${name}-${i}`}
-                    className="whitespace-nowrap font-serif text-xl tracking-tight text-white/55"
+                    className="whitespace-nowrap font-display text-lg font-semibold tracking-tight text-white/55"
                   >
                     {name}
                   </span>
@@ -105,45 +80,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── How it works ───────────────────────────────────────────────── */}
+      {/* ── One platform (catalogue tabs) ──────────────────────────────── */}
       <section className="py-20">
-        <Container className="flex flex-col gap-14">
+        <Container className="flex flex-col items-center gap-8">
           <Reveal>
             <SectionHeading
-              eyebrow="How it works"
-              title="From product photo to on-model, in three steps."
-              description="No professional photography, no booking a studio. Upload what you have and publish what you need."
+              eyebrow="One platform"
+              title="One platform for every fashion workflow."
             />
           </Reveal>
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <Reveal>
-              <div className="media overflow-hidden">
-                <Placeholder tone="model" ratio="4/3" label="on-model output" />
-              </div>
-            </Reveal>
-            <RevealGroup className="flex flex-col gap-4">
-              {steps.map((s, i) => {
-                const Icon = s.icon;
-                return (
-                  <RevealItem key={s.title}>
-                    <div className="flex items-start gap-4">
-                      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-key/10 text-key">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <div className="flex flex-col gap-1 border-b border-line pb-4">
-                        <span className="font-display text-xl font-bold tracking-tight">
-                          {i + 1}. {s.title}
-                        </span>
-                        <span className="text-sm leading-relaxed text-muted">
-                          {s.body}
-                        </span>
-                      </div>
-                    </div>
-                  </RevealItem>
-                );
-              })}
-            </RevealGroup>
-          </div>
+          <Reveal delay={0.06}>
+            <Button href="/platform" variant="soft">
+              Learn more
+            </Button>
+          </Reveal>
+          <Reveal delay={0.12} className="w-full">
+            <WorkflowTabs />
+          </Reveal>
         </Container>
       </section>
 
@@ -156,30 +109,25 @@ export default function HomePage() {
             </span>
           </Reveal>
           <Reveal delay={0.06}>
-            <h2 className="max-w-3xl text-balance font-serif text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl">
+            <h2 className="max-w-3xl text-balance font-display text-4xl font-medium leading-[1.05] tracking-tight text-fill sm:text-5xl">
               Every face here is{" "}
-              <span className="font-semibold italic">AI generated.</span>
+              <span className="font-semibold">AI generated.</span>
             </h2>
           </Reveal>
         </Container>
         <Reveal delay={0.1}>
-          <ShowcaseStrip />
+          <CenterSlider />
         </Reveal>
       </section>
 
-      {/* ── Solution cards (stat-led) ──────────────────────────────────── */}
-      <section className="py-12">
-        <Container className="flex flex-col gap-12">
-          <Reveal>
-            <SectionHeading
-              eyebrow="What you can build"
-              title="Every product visual, one platform."
-              description="Five composable endpoints for the whole catalogue. Outcomes shown are from the use cases, illustrative placeholders."
-            />
-          </Reveal>
-          <SolutionCards />
-        </Container>
-      </section>
+      {/* ── Stats over imagery ─────────────────────────────────────────── */}
+      <StatsShowcase />
+
+      {/* ── Testimonials ───────────────────────────────────────────────── */}
+      <Testimonials />
+
+      {/* ── Category showcase ──────────────────────────────────────────── */}
+      <CategoryShowcase />
 
       {/* ── Before / after ─────────────────────────────────────────────── */}
       <section className="py-20">
